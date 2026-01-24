@@ -19,30 +19,40 @@ document.querySelectorAll(".animate").forEach(el => {
 /* 🎵 NADASWARAM AUDIO           */
 /* ============================= */
 
-const audio = document.getElementById("bg-audio");
-const toggle = document.getElementById("sound-toggle");
+document.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("bg-audio");
+  if (!audio) return;
 
-// Safety check in case elements aren't loaded yet
-if (audio && toggle) {
+  audio.volume = 0.25;
+  audio.loop = true;
 
-  toggle.addEventListener("click", () => {
-    if (audio.paused) {
-      audio.volume = 0.25;
-      audio.play().catch(() => {});
-      toggle.innerText = "🔊";
-      localStorage.setItem("sound", "on");
-    } else {
-      audio.pause();
-      toggle.innerText = "🔇";
-      localStorage.setItem("sound", "off");
+  let hasPlayed = false;
+
+  const unlockAudio = () => {
+    if (hasPlayed) return;
+
+    audio.play()
+      .then(() => {
+        hasPlayed = true;
+        console.log("Nadaswaram started 🎵");
+      })
+      .catch(err => {
+        console.log("Audio blocked, retrying on next gesture");
+      });
+
+    // Remove listeners once triggered
+    if (hasPlayed) {
+      document.removeEventListener("click", unlockAudio);
+      document.removeEventListener("touchstart", unlockAudio);
+      document.removeEventListener("scroll", unlockAudio);
     }
-  });
+  };
 
-  // Restore preference
-  if (localStorage.getItem("sound") === "on") {
-    audio.volume = 0.25;
-    audio.play().catch(() => {});
-    toggle.innerText = "🔊";
-  }
+  // Try once immediately
+  unlockAudio();
 
-}
+  // Fallbacks: start on any user interaction
+  document.addEventListener("click", unlockAudio);
+  document.addEventListener("touchstart", unlockAudio);
+  document.addEventListener("scroll", unlockAudio);
+});

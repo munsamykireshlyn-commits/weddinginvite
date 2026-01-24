@@ -1,27 +1,43 @@
-/* RESET */
-* { box-sizing: border-box; }
+/* ============================= */
+/* RESET                         */
+/* ============================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  margin: 0;
   font-family: Georgia, serif;
-  background: #5a0f1b;
+  background: #2b0a0f;
   color: #f6f1e8;
   overflow-x: hidden;
 }
 
-/* HERO */
+/* ============================= */
+/* HERO — PERSISTENT & NO CROP   */
+/* ============================= */
+
 .persistent-hero {
   position: fixed;
   inset: 0;
-  z-index: 0;
-  pointer-events: none;
+  z-index: -1;
+  background: #4b0f18; /* fallback maroon */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100vw;
+  max-height: 100vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;       /* ZERO CROPPING */
+  object-position: center;
   animation: elephantFloat 8s ease-in-out infinite;
   filter: drop-shadow(0 10px 25px rgba(0,0,0,.35));
 }
@@ -30,7 +46,10 @@ body {
   height: 100vh;
 }
 
-/* SECTIONS */
+/* ============================= */
+/* SECTIONS                      */
+/* ============================= */
+
 .section {
   min-height: 100vh;
   display: flex;
@@ -42,27 +61,29 @@ body {
   background: transparent;
 }
 
-/* GLASS PANEL */
+/* ============================= */
+/* GLASS PANEL (CLEAR)           */
+/* ============================= */
+
 .content {
-  max-width: 720px;
+  max-width: 780px;
   width: 100%;
   text-align: center;
   padding: 2.8rem 2.4rem;
   border-radius: 22px;
 
-  background: linear-gradient(
-    rgba(255, 255, 255, 0.18),
-    rgba(255, 255, 255, 0.18)
-  );
-
+  background: rgba(255, 255, 255, 0.10); /* clear glass */
   backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(14px);
 
   box-shadow: 0 15px 40px rgba(0,0,0,.25);
   border: 1px solid rgba(255,255,255,.22);
 }
 
-/* TEXT */
+/* ============================= */
+/* TEXT STYLES                   */
+/* ============================= */
+
 .invocation-symbol {
   color: #e2c36b;
   letter-spacing: .18em;
@@ -89,7 +110,9 @@ body {
   letter-spacing: .06em;
 }
 
-.names-block { margin-top: 2.4rem; }
+.names-block {
+  margin-top: 2.4rem;
+}
 
 .with-text {
   margin: 1.2rem 0 .5rem;
@@ -101,74 +124,61 @@ h2 {
   letter-spacing: .14em;
 }
 
-/* SCROLL FADE */
+/* ============================= */
+/* SCROLL FADE                   */
+/* ============================= */
+
 .animate {
   opacity: 0;
   transform: translateY(30px);
+  transition: all 1.6s ease;
 }
 
 .animate.visible {
   opacity: 1;
   transform: translateY(0);
-  transition: 1.6s ease;
 }
 
-/* HERO FLOAT */
+/* ============================= */
+/* HERO FLOAT ANIMATION          */
+/* ============================= */
+
 @keyframes elephantFloat {
-  0%,100% { transform: translateY(0); }
+  0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
 
-/* MARIGOLD PETALS */
-#petal-container {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 3;
-  overflow: hidden;
-}
+/* ============================= */
+/* SOUND BUTTON — DISABLED       */
+/* ============================= */
 
-.petal {
-  position: absolute;
-  top: -60px;
-  width: 40px;
-  height: 40px;
-  background: radial-gradient(circle at 30% 30%, #ffd36b, #ff9f1c 70%);
-  border-radius: 50% 50% 60% 60%;
-  opacity: .55;
-  filter: blur(.5px);
-  animation: fall linear infinite;
-}
-
-@keyframes fall {
-  0% { transform: translateY(-80px) rotate(0deg); }
-  100% { transform: translateY(110vh) rotate(360deg); }
-}
-
-/* SOUND BUTTON */
 .sound-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
-  background: rgba(0,0,0,.45);
-  color: #f8e6b0;
-  border: 1px solid rgba(255,255,255,.3);
-  border-radius: 50%;
-  width: 54px;
-  height: 54px;
-  font-size: 1.3rem;
-  cursor: pointer;
-  backdrop-filter: blur(6px);
-  transition: transform .3s ease;
+  display: none;
 }
 
-.sound-btn:hover { transform: scale(1.08); }
+/* ============================= */
+/* MOBILE OPTIMIZATION           */
+/* ============================= */
 
-/* MOBILE */
 @media (max-width: 768px) {
-  .name { font-size: 2.1rem; }
-  .content { padding: 2rem 1.4rem; }
+  .hero-img {
+    max-width: 100%;
+    max-height: 100%;
+    padding: 8px;
+  }
+
+  .hero-spacer {
+    height: 92vh;
+  }
+
+  .name {
+    font-size: 2.1rem;
+  }
+
+  .content {
+    padding: 2rem 1.6rem;
+  }
+
   .invocation-text,
   .family-text,
   .blessing-text,
