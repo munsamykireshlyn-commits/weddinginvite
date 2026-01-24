@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedding Invitation</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- HERO BACKGROUND -->
+<div class="persistent-hero">
+  <img src="motifs/hero.png" class="hero-img"/>
+</div>
+
+<div class="hero-spacer"></div>
+
+<!-- GREETING + NAMES -->
+<section class="section animate">
+  <div class="content">
+    <p class="invocation-symbol"></p>
+    <p class="invocation-text"></p>
+    <p class="family-text"></p>
+
+    <div class="names-block">
+      <h1 class="name groom-name"></h1>
+      <p class="with-text">with</p>
+      <h1 class="name bride-name"></h1>
+      <p class="bride-parents"></p>
+    </div>
+  </div>
+</section>
+
+<!-- DATE -->
+<section class="section animate">
+  <div class="content">
+    <h2>Date & Time</h2>
+    <p class="wedding-date"></p>
+    <p class="wedding-time"></p>
+    <p class="wedding-muhurat"></p>
+  </div>
+</section>
+
+<!-- VENUE -->
+<section class="section animate">
+  <div class="content">
+    <h2>Venue</h2>
+    <p class="venue-name"></p>
+    <p class="venue-location"></p>
+    <a 
+    href="https://www.google.com/search?q=the+whiteboxx+musgrave&rlz=1C1GCEU_en&oq=the+whiteboxx+musgrave&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yCggCEAAYgAQYogQyCggDEAAYgAQYogQyCggEEAAYgAQYogQyCggFEAAYgAQYogTSAQkxOTAyNWowajeoAgiwAgHxBWILfFXscW_J8QViC3xV7HFvyQ&sourceid=chrome&ie=UTF-8" 
+    target="_blank" 
+    class="rsvp-btn">
+    Please Click Here To Get Directions!
+    </a>
+  </div>
+</section>
+
+<!-- BLESSING -->
+<section class="section animate">
+  <div class="content">
+    <p class="blessing-text"></p>
+    <p class="closing-text"></p>
+  </div>
+</section>
+
+
+<!-- RSVP -->
+<section class="section animate" id="rsvp">
+  <div class="content">
+    <h2>Kindly Confirm Your Presence</h2>
+    <p class="rsvp-subtext">We look forward to celebrating with you</p>
+    <p class="rsvp-subtext">RSVP by the: 12th April 2026</p>
+
+    <a 
+      href="https://forms.gle/uXqU74m5tpLkMBwp7" 
+      target="_blank" 
+      class="rsvp-btn">
+      Please Click Here To RSVP!
+    </a>
+  </div>
+</section>
+
+<!-- BACKGROUND AUDIO -->
+<audio id="bg-audio" loop>
+  <source src="audio/nadaswaram.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SOUND TOGGLE -->
+<button id="sound-toggle" class="sound-btn">🔇</button>
+
+<!-- DATA -->
+<script src="data.js"></script>
+
+<!-- SCROLL + AUDIO -->
+<script src="js/scroll.js"></script>
+
+<!-- DATA BINDING -->
+<script>
+  document.querySelector(".invocation-symbol").innerText = invitationData.invocationSymbol;
+  document.querySelector(".invocation-text").innerText = invitationData.invocationText;
+  document.querySelector(".family-text").innerText = invitationData.familyText;
+
+  document.querySelector(".groom-name").innerText = invitationData.groom;
+  document.querySelector(".bride-name").innerText = invitationData.bride;
+  document.querySelector(".bride-parents").innerText = invitationData.brideParents;
+
+  document.querySelector(".wedding-date").innerText = invitationData.date;
+  document.querySelector(".wedding-time").innerText = invitationData.time;
+  document.querySelector(".wedding-muhurat").innerText = invitationData.muhurat;
+
+  document.querySelector(".venue-name").innerText = invitationData.venue;
+  document.querySelector(".venue-location").innerText = invitationData.location;
+
+  document.querySelector(".blessing-text").innerText = invitationData.blessing;
+  document.querySelector(".closing-text").innerText = invitationData.closing;
+</script>
+
+</body>
+</html>
