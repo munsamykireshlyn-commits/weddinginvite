@@ -1,10 +1,11 @@
 const inviteData = {
   ganesha: "॥ Sri Ganeshaya Namah ॥",
-  invocation: "With the blessings of the Almighty, we invite you to share our joy.",
-  family: "Mr. & Mrs. Munsamy request the honour of your presence at the wedding of their beloved son",
+  invocationSymbol: "ஸ்ரீ கணேசாய நமஹ",
+  invocation: "With the blessings of the Almighty, we invite you to witness the marriage of.",
+  family: "Son of Sugan & Kogie Munsamy",
   groom: "Kireshlyn Munsamy",
   bride: "Jeanelle M Soobben",
-  brideParents: "Beloved daughter of Mr. & Mrs. Soobben",
+  brideParents: "Daughter of Strini & Vino Soobben",
   date: "Saturday, 11th July 2026",
   time: "2:00 PM",
   muhurat: "",
@@ -15,6 +16,7 @@ const inviteData = {
 };
 
 document.querySelector(".invocation-symbol").innerText = inviteData.ganesha;
+document.querySelector(".tamiltext").innerText = inviteData.invocationSymbol;
 document.querySelector(".invocation-text").innerText = inviteData.invocation;
 document.querySelector(".family-text").innerText = inviteData.family;
 document.querySelector(".groom-name").innerText = inviteData.groom;

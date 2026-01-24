@@ -35,17 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(() => {
         hasPlayed = true;
         console.log("Nadaswaram started 🎵");
+        cleanup();
       })
-      .catch(err => {
-        console.log("Audio blocked, retrying on next gesture");
+      .catch(() => {
+        // Autoplay blocked; wait for user gesture
       });
+  };
 
-    // Remove listeners once triggered
-    if (hasPlayed) {
-      document.removeEventListener("click", unlockAudio);
-      document.removeEventListener("touchstart", unlockAudio);
-      document.removeEventListener("scroll", unlockAudio);
-    }
+  const cleanup = () => {
+    document.removeEventListener("click", unlockAudio);
+    document.removeEventListener("touchstart", unlockAudio);
+    document.removeEventListener("scroll", unlockAudio);
   };
 
   // Try once immediately
@@ -55,4 +55,31 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", unlockAudio);
   document.addEventListener("touchstart", unlockAudio);
   document.addEventListener("scroll", unlockAudio);
+});
+
+
+/* ============================= */
+/* 🌿 SUBTLE PARALLAX EFFECT     */
+/* ============================= */
+
+const hero = document.querySelector(".hero-img");
+let latestScroll = 0;
+let ticking = false;
+
+const updateParallax = () => {
+  if (!hero) return;
+
+  const offset = latestScroll * 0.010; // ultra-subtle depth
+  hero.style.transform = `translate(-50%, -50%) translateY(${offset}px)`;
+
+  ticking = false;
+};
+
+window.addEventListener("scroll", () => {
+  latestScroll = window.scrollY;
+
+  if (!ticking) {
+    window.requestAnimationFrame(updateParallax);
+    ticking = true;
+  }
 });
