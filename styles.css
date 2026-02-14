@@ -20,6 +20,99 @@ body {
 }
 
 /* ============================= */
+/* TAP TO BEGIN OVERLAY          */
+/* ============================= */
+
+body.locked {
+  overflow: hidden;
+}
+
+.start-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: rgba(10, 6, 8, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.start-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.start-card {
+  width: min(520px, 92vw);
+  border-radius: 22px;
+  padding: 2.2rem 1.8rem;
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255,255,255,0.22);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.35);
+}
+
+.start-title {
+  font-size: 1.35rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f8e6b0;
+}
+
+.start-sub {
+  margin-top: 0.7rem;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.start-hint {
+  margin-top: 1.4rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  color: #f2d27c;
+  animation: hintPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+  0%, 100% { transform: translateY(0); opacity: 0.85; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+.start-btn {
+  margin-top: 1.8rem;
+  padding: 0.85rem 2.1rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+
+  font-family: Georgia, serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: #3a1a05;
+  background: linear-gradient(135deg, #f8e6b0 0%, #f2d27c 50%, #e5b95c 100%);
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.28),
+    inset 0 1px 1px rgba(255,255,255,0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 30px rgba(0,0,0,0.35),
+    inset 0 1px 1px rgba(255,255,255,0.55);
+}
+
+.start-btn:active {
+  transform: translateY(0);
+}
+
+/* ============================= */
 /* HERO — SMART FULLSCREEN       */
 /* ============================= */
 
@@ -204,7 +297,6 @@ h2 {
   opacity: 1;
 }
 
-/* Auto shimmer when section fades in */
 .animate.visible .rsvp-btn::before {
   animation: shimmerSweep 1.2s ease forwards;
   opacity: 1;
@@ -252,10 +344,35 @@ h2 {
 }
 
 /* ============================= */
+/* SPACERS + TAMIL TEXT          */
+/* ============================= */
+
+.venue-spacer {
+  height: 1.8rem;
+}
+
+.tamiltext {
+  font-family: "Noto Serif Tamil", "Latha", "InaiMathi", Georgia, serif;
+  color: #e2c36b;
+  letter-spacing: 0.08em;
+  font-size: 1.25rem;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 0 12px rgba(226,195,107,0.45);
+}
+
+/* ============================= */
 /* MOBILE OPTIMIZATION           */
 /* ============================= */
 
 @media (max-width: 768px) {
+
+  .start-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .start-title {
+    font-size: 1.2rem;
+  }
 
   .hero-img {
     width: 120%;
@@ -291,15 +408,4 @@ h2 {
     font-size: 0.95rem;
     padding: 0.85rem 2.1rem;
   }
-}
-.venue-spacer {
-  height: 1.8rem;
-}
-.tamiltext {
-  font-family: "Noto Serif Tamil", "Latha", "InaiMathi", Georgia, serif;
-  color: #e2c36b;
-  letter-spacing: 0.08em;  /* tighter for Tamil */
-  font-size: 1.25rem;
-  margin-bottom: 1.2rem;
-  text-shadow: 0 0 12px rgba(226,195,107,0.45);
 }

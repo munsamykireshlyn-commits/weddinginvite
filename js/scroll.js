@@ -16,45 +16,60 @@ document.querySelectorAll(".animate").forEach(el => {
 
 
 /* ============================= */
-/* 🎵 NADASWARAM AUDIO           */
+/* 🎵 AUDIO + TAP TO BEGIN       */
 /* ============================= */
 
 document.addEventListener("DOMContentLoaded", () => {
   const audio = document.getElementById("bg-audio");
-  if (!audio) return;
+  const overlay = document.getElementById("start-overlay");
+  const btn = document.getElementById("start-btn");
 
-  audio.volume = 0.25;
-  audio.loop = true;
+  // If overlay isn't present, fallback to old behavior
+  if (!overlay) {
+    if (!audio) return;
 
-  let hasPlayed = false;
+    audio.volume = 0.25;
+    audio.loop = true;
 
-  const unlockAudio = () => {
-    if (hasPlayed) return;
+    audio.play().catch(() => {});
+    return;
+  }
 
-    audio.play()
-      .then(() => {
-        hasPlayed = true;
-        console.log("Nadaswaram started 🎵");
-        cleanup();
-      })
-      .catch(() => {
-        // Autoplay blocked; wait for user gesture
-      });
+  // Lock scroll until user taps
+  document.body.classList.add("locked");
+
+  const startExperience = async () => {
+    // Hide overlay + unlock scroll
+    overlay.classList.add("hidden");
+    document.body.classList.remove("locked");
+
+    // Audio start (gesture-based, should succeed on mobile)
+    if (audio) {
+      audio.volume = 0.25;
+      audio.loop = true;
+      try {
+        await audio.play();
+      } catch (e) {
+        // If still blocked, user can tap again—overlay is gone though.
+      }
+    }
+
+    // Remove overlay after fade
+    setTimeout(() => {
+      overlay.style.display = "none";
+    }, 500);
   };
 
-  const cleanup = () => {
-    document.removeEventListener("click", unlockAudio);
-    document.removeEventListener("touchstart", unlockAudio);
-    document.removeEventListener("scroll", unlockAudio);
-  };
+  // Tap anywhere on overlay
+  overlay.addEventListener("click", startExperience, { once: true });
 
-  // Try once immediately
-  unlockAudio();
-
-  // Fallbacks: start on any user interaction
-  document.addEventListener("click", unlockAudio);
-  document.addEventListener("touchstart", unlockAudio);
-  document.addEventListener("scroll", unlockAudio);
+  // Or tap Begin button
+  if (btn) {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      startExperience();
+    }, { once: true });
+  }
 });
 
 
