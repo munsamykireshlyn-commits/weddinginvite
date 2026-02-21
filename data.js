@@ -1,5 +1,5 @@
 const inviteData = {
-  ganesha: "॥ Sri Ganeshaya Namah ॥",
+  ganesha: "॥Sri Ganeshaya Namah॥",
   invocationSymbol: "ஸ்ரீ கணேசாய நமஹ",
   invocation: "With the blessings of the Almighty, we invite you to witness the marriage of.",
   family: "Son of Sugan & Kogie Munsamy",
